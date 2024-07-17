@@ -1,5 +1,5 @@
 import ContactTable from "@/components/contact-table";
-import { CreateButton } from "@/components/create-button";
+import { CreateButton } from "@/components/custom-button";
 import Search from "@/components/search";
 import React from "react";
 
