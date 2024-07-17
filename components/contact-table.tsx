@@ -26,7 +26,7 @@ const ContactTable = async () => {
             <td className="py-3 px-6">
               {dateFormatter(data.createdAt.toString())}
             </td>
-            <td className="flex gap-3 py-3 px-6">
+            <td className="flex gap-3 py-3 px-6 justify-center">
               <EditButton />
               <DeleteButton />
             </td>
