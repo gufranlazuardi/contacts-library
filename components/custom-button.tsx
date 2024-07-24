@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import Link from "next/link";
 import { useFormStatus } from "react-dom";
 
@@ -15,11 +15,13 @@ export const CreateButton = () => {
   );
 };
 
-export const EditButton = () => {
+export const EditButton = ({ id }: { id: string }) => {
   return (
-    <div className="inline-flex items-center bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-sm text-sm cursor-pointer">
-      Edit
-    </div>
+    <Link href={`/contacts/edit/${id}`}>
+      <div className="inline-flex items-center bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-sm text-sm cursor-pointer">
+        Edit
+      </div>
+    </Link>
   );
 };
 

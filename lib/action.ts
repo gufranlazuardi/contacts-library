@@ -43,3 +43,40 @@ export const saveContact = async (
   revalidatePath("/contacts");
   redirect("/contacts");
 };
+
+export const updateContact = async (
+  id: string,
+  prevState: any,
+  formData: FormData
+) => {
+  const validate = ContactSchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
+
+  // validation
+  if (!validate.success) {
+    return {
+      Error: validate.error?.flatten().fieldErrors,
+    };
+  }
+
+  // create contact
+  try {
+    await prisma.contact.update({
+      data: {
+        name: validate.data.name,
+        phone: validate.data.phone,
+      },
+      // karena update, harus pake "where"
+      where: { id },
+    });
+  } catch (error: any) {
+    return {
+      message: "Failed to update contact",
+    };
+  }
+
+  // revalidate
+  revalidatePath("/contacts");
+  redirect("/contacts");
+};
