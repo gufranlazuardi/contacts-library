@@ -3,8 +3,16 @@ import { dateFormatter } from "@/lib/formatter";
 import React from "react";
 import { DeleteButton, EditButton } from "./custom-button";
 
-const ContactTable = async () => {
-  const contacts = await getContact();
+interface ContactTableProps {
+  query: string;
+  currentPage: number;
+}
+
+const ContactTable: React.FC<ContactTableProps> = async ({
+  query,
+  currentPage,
+}) => {
+  const contacts = await getContact(query, currentPage);
 
   return (
     <table className="w-full text-sm text-left">
