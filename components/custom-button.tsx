@@ -1,7 +1,9 @@
 "use client";
 
+import { deleteContact } from "@/lib/action";
 import { Plus } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 import { useFormStatus } from "react-dom";
 
 export const CreateButton = () => {
@@ -25,11 +27,20 @@ export const EditButton = ({ id }: { id: string }) => {
   );
 };
 
-export const DeleteButton = () => {
+interface DeleteButtonProps {
+  id: string;
+}
+
+export const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
+  // server actions pake bind. ada dua parameter : null dan id nya (props)
+  const DeleteContactWithId = deleteContact.bind(null, id);
   return (
-    <div className="inline-flex items-center bg-red-500 hover:bg-red-600 px-3 py-1 rounded-sm text-sm cursor-pointer">
-      Delete
-    </div>
+    // karena pake server actions, kita pake form
+    <form action={DeleteContactWithId}>
+      <button className="inline-flex items-center bg-red-500 hover:bg-red-600 px-3 py-1 rounded-sm text-sm cursor-pointer">
+        Delete
+      </button>
+    </form>
   );
 };
 
