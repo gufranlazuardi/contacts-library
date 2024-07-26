@@ -7,23 +7,27 @@ import {
   useSearchParams,
 } from "next/navigation";
 import React from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 const Search = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = (searchedWord: string) => {
-    console.log(searchedWord);
-    const params = new URLSearchParams(searchParams);
+  const handleSearch = useDebouncedCallback(
+    (searchedWord: string) => {
+      console.log("word request", searchedWord);
+      const params = new URLSearchParams(searchParams);
 
-    if (searchedWord) {
-      params.set("query", searchedWord);
-    } else {
-      params.delete("query");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  };
+      if (searchedWord) {
+        params.set("query", searchedWord);
+      } else {
+        params.delete("query");
+      }
+      replace(`${pathname}?${params.toString()}`);
+    },
+    1000
+  );
 
   return (
     <div className="relative w-full items-center justify-center flex flex-1">
@@ -32,7 +36,7 @@ const Search = () => {
         className="w-full border border-gray-200 py-2 pl-10 text-md text-gray-700 rounded-sm placeholder:text-sm"
         placeholder="Search..."
         onChange={(e) => handleSearch(e.target.value)}
-        defaultValue={searchParams.get("query")?.toString()}
+        defaultValue={searchParams.get("query") || ""}
       />
       <SearchIcon
         size={18}
