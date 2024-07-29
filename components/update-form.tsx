@@ -5,12 +5,6 @@ import { useFormState } from "react-dom";
 import { SubmitButton } from "./custom-button";
 import type { Contact } from "@prisma/client";
 
-// interface UpdateFormProps {
-//   contact: {
-//     contact: Contact;
-//   };
-// }
-
 const UpdateForm = ({ contact }: { contact: Contact }) => {
   const updateContactWithId = updateContact.bind(null, contact.id);
 

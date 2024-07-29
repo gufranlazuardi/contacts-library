@@ -1,11 +1,11 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import clsx from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { generatePagination } from "@/lib/formatter";
+import Link from "next/link";
+import React from "react";
+import clsx from "clsx";
 
 interface PaginationProps {
   totalPages: number;

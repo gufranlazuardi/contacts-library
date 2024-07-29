@@ -1,7 +1,7 @@
-import { getContact } from "@/lib/data";
-import { dateFormatter } from "@/lib/formatter";
-import React from "react";
 import { DeleteButton, EditButton } from "./custom-button";
+import { dateFormatter } from "@/lib/formatter";
+import { getContact } from "@/lib/data";
+import React from "react";
 
 interface ContactTableProps {
   query: string;
