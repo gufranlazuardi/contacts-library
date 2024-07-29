@@ -1,5 +1,6 @@
 "use client";
 
+import { useDebouncedCallback } from "use-debounce";
 import { SearchIcon } from "lucide-react";
 import {
   usePathname,
@@ -7,7 +8,6 @@ import {
   useSearchParams,
 } from "next/navigation";
 import React from "react";
-import { useDebouncedCallback } from "use-debounce";
 
 const Search = () => {
   const searchParams = useSearchParams();
@@ -16,8 +16,10 @@ const Search = () => {
 
   const handleSearch = useDebouncedCallback(
     (searchedWord: string) => {
-      console.log("word request", searchedWord);
+      // console.log("word request", searchedWord);
       const params = new URLSearchParams(searchParams);
+      // ketika searchParams, page jadi = 1
+      params.set("page", "1");
 
       if (searchedWord) {
         params.set("query", searchedWord);
